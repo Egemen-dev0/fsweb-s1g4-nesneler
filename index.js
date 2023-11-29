@@ -2,8 +2,8 @@
 /*Bu görevleri yaparken çıktıların doğru çalıştığını kontrol etmeniz için console.log'u sıklıkla kullanmanızı tavsiye ediyoruz.*/
 
 ///////////////Menu Elemanları ///////////////////
-const cay = {isim: "Çay", fiyat: 4, kategori: "İçecekler"};
-const serpmeKahvalti = {isim: "Serpme Kahvaltı", fiyat: 16, kategori:"Kahvaltı"};
+const cay = { isim: "Çay", fiyat: 4, kategori: "İçecekler" };
+const serpmeKahvalti = { isim: "Serpme Kahvaltı", fiyat: 16, kategori: "Kahvaltı" };
 
 /* Görev 1a: Nesneler döndüren bir fonksiyon yazın
 	Aşağıdaki MenuElemaniOlustur fonksiyonunu, yukarıda gördüğünüz cay ve serpmeKahvalti (isim, fiyat, kategori) nesnelerini oluşturacak şekilde yazın. 
@@ -15,10 +15,14 @@ const serpmeKahvalti = {isim: "Serpme Kahvaltı", fiyat: 16, kategori:"Kahvaltı
 */
 
 
-function MenuElemaniOlustur(/*Kodlar buraya*/){
-	/*Kodlar buraya*/
+function MenuElemaniOlustur(food, fee, category) {
+	return {
+		isim: food,
+		fiyat: fee,
+		kategori: category,
+	}
 }
-
+console.log(MenuElemaniOlustur('Cheeseburger', 8, 'Burgerler'));
 
 
 /*  Görev 1b (otomatik test yok): 
@@ -30,8 +34,11 @@ function MenuElemaniOlustur(/*Kodlar buraya*/){
 	
 	Örnek: MenuElemaniOlustur("Karışık Pizza",5,"Pizzalar") şunu döndürür: {isim:"Karışık Pizza",fiyat:5,kategori:"Pizzalar"}
 */
-
-
+let menuLazanya = MenuElemaniOlustur('Lazanya', 58, 'Makarnalar')
+let menuTatli = MenuElemaniOlustur('Crem Brule', 97, 'Tatlılar')
+let menuAlkol = MenuElemaniOlustur('Yeni Rakı 50cc', 375, 'Alkollü İçecekler')
+const Menuu = [menuLazanya, menuTatli, menuAlkol];
+console.table(Menuu);
 
 /* Görev 2: 
 	Özel bir öğle yemeği yiyorsun! Öğretmen ve öğrencilere %25, diğer kişilere %10 indirim var. Aşağıdaki burger nesnesine, indirimi fiyatı otomatik olarak hesaplayan bir metot ekleyin.
@@ -47,31 +54,42 @@ function MenuElemaniOlustur(/*Kodlar buraya*/){
 
 
 const burger = {
-	isim: "Burger", 
-	fiyat: 18, 
-	kategori: "Öğle Yemeği", 
+	isim: "Burger",
+	fiyat: 18,
+	kategori: "Öğle Yemeği",
+	indirim: function (profession) {
+		if (profession === "öğretmen" || profession === "öğrenci") {
+			return this.fiyat - (this.fiyat * 0.25)
+		} else if (profession === "diğer") {
+			return this.fiyat - (this.fiyat * 0.10)
+		}
+	}
 
 }
-
-
+console.log(burger.indirim("öğrenci"));
+console.log(burger.indirim("diğer"));
 
 ///////////////Değerlendirmeler (MVP)///////////////////
 const degerlendirmeler = [
-    {isim: "Nalan", puan: 5, geribildirim:"Mükemmel atmosfer ve mükemmel vegan seçenekleri!"},
-    {isim: "Kuddusi", puan: 3, geribildirim:"Benim zevkime göre biraz fazla yenilikçi, burger iyi ama fiyatı yüksek"},
-    {isim: "Kamuran", puan: 4, geribildirim:"eğlenceli bilgiler ve havalı hisler"},
-    {isim: "Elif", puan: 4.5, geribildirim:"Evimden pek çıkmıyorum ama çıktığımda sadece buraya geliyorum. Şiddetle tavsiye ederim."},
-    {isim: "Pınar", puan: 3, geribildirim: "atıştırmalıklar harika ve gün içinde çalışmak için güzel bir cafe alanı."},
-    {isim: "Ahmet", puan: 2, geribildirim: "Bu mekan beni fazla etkilemedi. Menüde özel bir şey yok ve çok pahalı. Atmosferi de ben beğenmedim ama başkaları beğenebilir." },
-    {isim: "Latife", puan: 4, geribildirim: "Kesinlikle karaoke Cumalarını seviyorum! Yemek ve içki çeşitleri iyi."},
-    {isim: "Reyna", puan: 3.5, geribildirim: ""},
+	{ isim: "Nalan", puan: 5, geribildirim: "Mükemmel atmosfer ve mükemmel vegan seçenekleri!" },
+	{ isim: "Kuddusi", puan: 3, geribildirim: "Benim zevkime göre biraz fazla yenilikçi, burger iyi ama fiyatı yüksek" },
+	{ isim: "Kamuran", puan: 4, geribildirim: "eğlenceli bilgiler ve havalı hisler" },
+	{ isim: "Elif", puan: 4.5, geribildirim: "Evimden pek çıkmıyorum ama çıktığımda sadece buraya geliyorum. Şiddetle tavsiye ederim." },
+	{ isim: "Pınar", puan: 3, geribildirim: "atıştırmalıklar harika ve gün içinde çalışmak için güzel bir cafe alanı." },
+	{ isim: "Ahmet", puan: 2, geribildirim: "Bu mekan beni fazla etkilemedi. Menüde özel bir şey yok ve çok pahalı. Atmosferi de ben beğenmedim ama başkaları beğenebilir." },
+	{ isim: "Latife", puan: 4, geribildirim: "Kesinlikle karaoke Cumalarını seviyorum! Yemek ve içki çeşitleri iyi." },
+	{ isim: "Reyna", puan: 3.5, geribildirim: "" },
 ]
 
 /*  Görev 3 (ototest yok):  
 	Yukarıdaki degerlendirmeler dizisini(array) kullanarak:
 	1. Sadece Ahmet'in geribildirimini konsolda görüntüleyin - fonksiyona gerek yok
 */
-
+for (let i = 0; i < degerlendirmeler.length; i++) {
+	if (degerlendirmeler[i].isim === "Ahmet") {
+		console.log(degerlendirmeler[i].geribildirim);
+	}
+}
 
 
 /*  Görev 4 (ototest yok):  
@@ -79,8 +97,12 @@ const degerlendirmeler = [
 	1. Bu geribildirimi Reyna'nın değerlendirmesine ekleyin - "bu mekan bir harika dostum, yine de garsonun gülümsememesinden puan kırdım"
 	2. degerlendirmeler dizisini konsolda görüntüleyerek çalışmanızı kontrol edin
 */
-
-
+for (let i = 0; i < degerlendirmeler.length; i++) {
+	if (degerlendirmeler[i].isim === "Reyna") {
+		degerlendirmeler[i].geribildirim = "bu mekan bir harika dostum, yine de garsonun gülümsememesinden puan kırdım"
+	}
+}
+console.table(degerlendirmeler);
 
 /*  Görev 5: 
 	isim, puan, geribildirim'i içeren bir değerlendirme nesnesi oluşturup, yeni değerlendirmeyi mevcut dizinin(array) sonuna ekleyip sonuç dizisini döndüren bir fonksiyon tanımlayın. 
@@ -94,11 +116,16 @@ const degerlendirmeler = [
 */
 
 
-function DegerlendirmeEkle(/*Kodlar buraya */){
-	/*Kodlar buraya */
-	
+function DegerlendirmeEkle(motherArray, name, point, feedback) {
+	const newObj = {
+		isim: name,
+		puan: point,
+		geribildirim: feedback,
+	}
+	motherArray.push(newObj);
+	return motherArray;
 }
-
+DegerlendirmeEkle(degerlendirmeler, 'Hurşut', 2, 'Boktan yemekler!');
 
 
 /*  Görev 6: 
@@ -112,12 +139,15 @@ function DegerlendirmeEkle(/*Kodlar buraya */){
 */
 
 
-function AnahtardanDegerlendirmeAl(/*Kodlar buraya*/) {
-	/*Kodlar buraya*/
+function AnahtardanDegerlendirmeAl(arrtobeselected, indxnbr) {
+	const isims = arrtobeselected[indxnbr].isim;
+	const puans = arrtobeselected[indxnbr].puan;
+	const geriBildirim = arrtobeselected[indxnbr].geribildirim;
+
+	return `${isims} isimli kişi ${puans} puan verdi ve şunları yazdı: ${geriBildirim}`
 
 }
-
-
+console.log(AnahtardanDegerlendirmeAl(degerlendirmeler, 0));
 
 /*  Görev 7:  
 	Diziden en son değerlendirmeyi döndüren adı `SonDegerlendirmeyiAl` olan bir fonksiyon yazın 
@@ -132,10 +162,16 @@ function AnahtardanDegerlendirmeAl(/*Kodlar buraya*/) {
 */
 
 
-function SonDegerlendirmeyiAl(/*Kodlar buraya*/) {
-	/*Kodlar buraya*/
-} 
+function SonDegerlendirmeyiAl(secilecekarr) {
+	const sondeger = secilecekarr.length - 1;
+	const isims = secilecekarr[sondeger].isim;
+	const puans = secilecekarr[sondeger].puan;
+	const geriBildirim = secilecekarr[sondeger].geribildirim;
 
+	return `${isims} isimli kişi ${puans} puan verdi ve şunları yazdı: ${geriBildirim}`
+
+}
+console.log(SonDegerlendirmeyiAl(degerlendirmeler));
 
 
 /////////////// BONUS  GÖRVLER////////////////////
@@ -148,14 +184,20 @@ function SonDegerlendirmeyiAl(/*Kodlar buraya*/) {
 	
 	Örnek: PuanaGoreDegerlendirmeAl(degerlendirmeler, 4) 4 ile 4.9 puan aralığındaki tüm değerlendirmeleri döndürecek :
 	[
-    {isim: "Kamuran", puan: 4, geribildirim:"eğlenceli bilgiler ve havalı hisler},
-    {isim: "Elif", puan: 4.5, geribildirim:"Evimden pek çıkmıyorum ama çıktığımda sadece buraya geliyorum. Şiddetle tavsiye ederim."},
-    {isim:"Latife", puan: 4, geribildirim: "Kesinlikle karaoke Cumalarını seviyorum! Yemek ve içki çeşitleri iyi."}
+	{isim: "Kamuran", puan: 4, geribildirim:"eğlenceli bilgiler ve havalı hisler},
+	{isim: "Elif", puan: 4.5, geribildirim:"Evimden pek çıkmıyorum ama çıktığımda sadece buraya geliyorum. Şiddetle tavsiye ederim."},
+	{isim:"Latife", puan: 4, geribildirim: "Kesinlikle karaoke Cumalarını seviyorum! Yemek ve içki çeşitleri iyi."}
 	]
 */
 
-function PuanaGoreDegerlendirmeAl(/* Kodlar buraya */) {
-    /* Kodlar buraya */
+function PuanaGoreDegerlendirmeAl(arrtobeselected, aralik) {
+	let istenenYorumlar = [];
+	for (let i = 0; i < arrtobeselected.length; i++) {
+		let degerlendirme12 = arrtobeselected[i]
+		if (Math.floor(degerlendirme12.puan) === aralik)
+			istenenYorumlar.push(degerlendirme12)
+	}
+	return istenenYorumlar;
 }
 
 
@@ -166,8 +208,15 @@ function PuanaGoreDegerlendirmeAl(/* Kodlar buraya */) {
 	
 */
 
-function UzunDegerlendirmeleriAl(/* Kodlar buraya */) {
-    /* Kodlar buraya */
+function UzunDegerlendirmeleriAl(secilecekArr) {
+	const result = [];
+	for (let i = 0; i < secilecekArr.length; i++) {
+		const wordCount = secilecekArr[i].geribildirim.split(" ")
+		if (wordCount.length >= 15) {
+			result.push(secilecekArr[i].geribildirim);
+		}
+	}
+	return result;
 }
 
 
@@ -187,16 +236,35 @@ function UzunDegerlendirmeleriAl(/* Kodlar buraya */) {
 	Şu şekilde metotu çağıralım araba1.surus(100)
 	Bu 110 döndürmelidir çünkü başlangıç kilometre sayacını 10 olarak tanımladık ve 100 km arabayı sürdük.
 */
-
-
-function arabaYapici(/* Kodlar buraya */) {
-    /* Kodlar buraya */
-    
+const araba = {
+	marka: "Volvo",
+	model: "V40",
+	yil: 2018,
+	kilometreSayaci: 115000,
+	surus: function (nmb) {
+		return this.kilometreSayaci + nmb;
+	}
 }
+araba.surus(555);
 
+const arabaVersyonİki = {
+	marka: "Volvo",
+	model: "V40",
+	yil: 2018,
+	kilometreSayaci: 115000,
+	surus: function (doWhat, nmb) {
+		if (doWhat === "arttır"){
+			return this.kilometreSayaci + nmb;
+	} else if (doWhat === "azalt") {
+		return this.kilometreSayaci - nmb;
+	}
+}
+}
+arabaVersyonİki.surus("arttır", 555);
+arabaVersyonİki.surus("azalt", 555);
 
 /*  Buradan aşağıdaki kodları değiştirmeyin lütfen */
-function sa(){
+function sa() {
 	console.log('Kodlar çalışıyor');
 	return 'as';
 }
